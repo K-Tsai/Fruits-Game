@@ -1,6 +1,7 @@
 let playing= false
 let score;
 let trialsLeft;
+let fruits = ['apple', 'banana', 'cherries', 'grapes', 'mango', 'orange', 'peach', 'pear', 'watermelon'];
 $(function() {
   $("#startreset").click(function(){
     if (playing == true) { //are we playing?
@@ -13,13 +14,14 @@ $(function() {
       $("#trialsLeft").show();
       trialsLeft= 3;
       addHearts();
+      startAction();
     }
   })
 });
 
 function addHearts() {
   for(let i = 0 ; i < trialsLeft; i++) {
-    $('#trialsLeft').append('<img id="heartImg" src="images/heart.png" />')
+    $('#trialsLeft').append('<img class="heartImg" src="images/heart.png" />')
   }
 }
 
@@ -40,3 +42,13 @@ function addHearts() {
 //slice a fruit 
   //play sound
   //explode fruit
+
+  function startAction() {
+    $('#fruit1').show();
+    chooseFruit(); //random fruit
+    $('#fruit1').css({'left': Math.round(Math.random()*550), 'top': -50})
+  }
+
+  function chooseFruit () {
+    $("#fruit1").attr('src', 'images/' + fruits[Math.round(Math.random() * 8)] + '.png');
+  }
