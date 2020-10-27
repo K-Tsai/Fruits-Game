@@ -2,6 +2,9 @@ let playing= false
 let score;
 let trialsLeft;
 let fruits = ['apple', 'banana', 'cherries', 'grapes', 'mango', 'orange', 'peach', 'pear', 'watermelon'];
+let step;
+let action;
+
 $(function() {
   $("#startreset").click(function(){
     if (playing == true) { //are we playing?
@@ -47,6 +50,14 @@ function addHearts() {
     $('#fruit1').show();
     chooseFruit(); //random fruit
     $('#fruit1').css({'left': Math.round(Math.random()*550), 'top': -50})
+
+    //generate a random step
+    step = Math.round(Math.random() * 5) + 1;
+    action = setInterval(function(){
+      $('#fruit1').css('top', 
+      $('#fruit1').position().top + step);
+    }, 10);
+
   }
 
   function chooseFruit () {
