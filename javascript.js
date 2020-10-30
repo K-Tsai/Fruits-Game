@@ -23,6 +23,7 @@ $(function() {
 });
 
 function addHearts() {
+  $("trialsLeft").empty();
   for(let i = 0 ; i < trialsLeft; i++) {
     $('#trialsLeft').append('<img class="heartImg" src="images/heart.png" />')
   }
@@ -56,6 +57,24 @@ function addHearts() {
     action = setInterval(function(){
       $('#fruit1').css('top', 
       $('#fruit1').position().top + step);
+      if($('#fruit1').position().top > $('#fruitsContainer').height()){
+        if (trialsLeft > 1){
+          $('#fruit1').show();
+          chooseFruit(); //random fruit
+          $('#fruit1').css({'left': Math.round(Math.random()*550), 'top': -50})
+
+          //generate a random step
+          step = Math.round(Math.random() * 5) + 1;
+          trialsLeft --;
+          addHearts();
+        } else {
+          playing = false;
+          $('#startreset').html("Start Game");
+          $('#gameOver').show();
+          $('#trialsLeft').hide();
+          $('#gameOver').html("<p>Game Over</p> <p>Your Score is " + score + ".</p>");
+        }
+      }
     }, 10);
 
   }
